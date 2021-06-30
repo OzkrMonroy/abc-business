@@ -1,10 +1,8 @@
-import React from 'react';
+import { LoginPage } from './pages/login/LoginPage';
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <p></p>
-    </div>
+    <LoginPage/>
   );
 }
 
