@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import device from "../../utils/css/breakpoints";
 
@@ -5,6 +6,11 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 85%;
+
+  & p {
+    color: #192369;
+    text-align: center;
+  }
 
   @media ${device.mobileL} {
     width: 40%;
@@ -79,7 +85,12 @@ export const SubmitButton = styled.input`
     background-color: #001557;
   }
 `
-
+export const FormLink = styled(Link)`
+  text-decoration: none;
+  color: #560015;
+  font-size: 1rem;
+  font-weight: 700;
+`
 // .color1 {color: #6f1b27;}
 // .color2 {color: #560015;}
 // .color3 {color: #001557;}

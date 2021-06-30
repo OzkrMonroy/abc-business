@@ -1,6 +1,6 @@
-import { FormContainer, FormHeader, InputLabel, Input, SubmitButton } from './loginFormStyles';
+import { FormContainer, FormHeader, InputLabel, Input, SubmitButton, FormLink } from '../formStyles'
 
-export const LoginForm = () => {
+export const SigninForm = () => {
   return (
     <FormContainer>
       <FormHeader>
@@ -18,6 +18,7 @@ export const LoginForm = () => {
         </InputLabel>
         <SubmitButton type='submit' value='Log In'/>
       </form>
+      <p>Don't you have an account? <FormLink to='/signup'>Sign Up</FormLink> </p>
     </FormContainer>
   )
 }
