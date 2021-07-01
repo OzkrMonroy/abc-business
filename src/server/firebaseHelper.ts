@@ -34,6 +34,10 @@ export const signInWithEmail = (email: string, password: string) => {
   return auth.signInWithEmailAndPassword(email, password);
 }
 
+export const signOut = () => {
+  auth.signOut();
+}
+
 export const createUserDocument = async (userAuth: any, additionalData: any) => {
   if(!userAuth) return;
 
@@ -57,6 +61,10 @@ export const createUserDocument = async (userAuth: any, additionalData: any) => 
   }
 
   return userRef;
+}
+
+export const addProductToFirestore = (productData: {}) => {
+  return firestore.collection('Products').doc().set(productData);
 }
 
 export default firebase;

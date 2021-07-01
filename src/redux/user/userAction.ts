@@ -1,4 +1,4 @@
-import { createUserDocument, getCurrentUser, signInWithEmail, signupWithEmail } from "../../server/firebaseHelper";
+import { createUserDocument, getCurrentUser, signInWithEmail, signOut, signupWithEmail } from "../../server/firebaseHelper";
 import UserTypes from "./userTypes";
 
 // Register
@@ -17,6 +17,15 @@ export const getUserDataSuccess = (user: {}) => ({
 
 export const getUserDataFailure = (errorMessage: string) => ({
   type: UserTypes.GET_USER_DATA_FAILURE,
+  payload: errorMessage
+})
+
+export const userSignOutSuccess = () => ({
+  type: UserTypes.USER_SIGN_OUT_SUCCESS
+})
+
+export const userSignOutFailure = (errorMessage: string) => ({
+  type: UserTypes.USER_SIGN_OUT_FAILURE,
   payload: errorMessage
 })
 
@@ -66,6 +75,17 @@ export const checkUserSession = () => {
       dispatch(getSnapshotFromUserAuth(userAuth, null));
     } catch (error) {
       dispatch(getUserDataFailure(error.message));
+    }
+  }
+}
+
+export const signOutStartAsync = () => {
+  return async (dispatch: any) => {
+    try {
+      await signOut();
+      dispatch(userSignOutSuccess());
+    } catch (error) {
+      dispatch(userSignOutFailure(error.message));
     }
   }
 }
