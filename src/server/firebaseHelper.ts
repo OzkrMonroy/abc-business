@@ -21,5 +21,29 @@ export const signupWithEmail = (email: string, password: string) => {
   return auth.createUserWithEmailAndPassword(email, password);
 }
 
+export const createUserDocument = async (userAuth: any, additionalData: any) => {
+  if(!userAuth) return;
+
+  const userRef = firestore.doc(`Users/${userAuth.uid}`);
+  const userSnapshot = await userRef.get();
+
+  if(!userSnapshot.exists){
+    const { displayName, email } = userAuth;
+    const userCreatedAt = new Date();
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        userCreatedAt,
+        ...additionalData
+      })
+    } catch (error) {
+      console.log('Error creating user', error.message);
+    }
+  }
+
+  return userRef;
+}
 
 export default firebase;
