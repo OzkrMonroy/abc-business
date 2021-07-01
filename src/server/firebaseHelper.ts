@@ -17,8 +17,21 @@ firebase.initializeApp(firebaseConfig);
 export const firestore = firebase.firestore();
 export const auth = firebase.auth();
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsuscribe = auth.onAuthStateChanged(userAuth => {
+      unsuscribe();
+      resolve(userAuth)
+    }, reject)
+  })
+}
+
 export const signupWithEmail = (email: string, password: string) => {
   return auth.createUserWithEmailAndPassword(email, password);
+}
+
+export const signInWithEmail = (email: string, password: string) => {
+  return auth.signInWithEmailAndPassword(email, password);
 }
 
 export const createUserDocument = async (userAuth: any, additionalData: any) => {

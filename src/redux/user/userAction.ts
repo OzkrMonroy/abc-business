@@ -1,4 +1,4 @@
-import { createUserDocument, signupWithEmail } from "../../server/firebaseHelper";
+import { createUserDocument, getCurrentUser, signInWithEmail, signupWithEmail } from "../../server/firebaseHelper";
 import UserTypes from "./userTypes";
 
 // Register
@@ -6,27 +6,29 @@ export const registerUserStart = () => ({
   type: UserTypes.REGISTER_USER_START
 })
 
-export const registerUserSucces = (user: {}) => ({
-  type: UserTypes.REGISTER_USER_SUCCESS,
+export const signInUserStart = () => ({
+  type: UserTypes.SIGN_IN_USER_START
+})
+
+export const getUserDataSuccess = (user: {}) => ({
+  type: UserTypes.GET_USER_DATA_SUCCESS,
   payload: user
 })
 
-export const registerUserFailure = (errorMessage: string) => ({
-  type: UserTypes.REGISTER_USER_FAILURE,
+export const getUserDataFailure = (errorMessage: string) => ({
+  type: UserTypes.GET_USER_DATA_FAILURE,
   payload: errorMessage
 })
 
 // Create
-export const createUserProfileDocumentStart = (userAuth: any, additionalData: any) => {
+export const getSnapshotFromUserAuth = (userAuth: any, additionalData: any) => {
   return async (dispatch: any) => {
     try {
       const userRef = await createUserDocument(userAuth, additionalData);
       const userSnapshot = await userRef?.get();
-      console.log({id: userSnapshot?.id, ...userSnapshot?.data()});
-      dispatch(registerUserSucces({id: userSnapshot?.id, ...userSnapshot?.data()}));
+      dispatch(getUserDataSuccess({id: userSnapshot?.id, ...userSnapshot?.data()}));
     } catch (error) {
-      console.log(error);
-      dispatch(registerUserFailure(error.message))
+      dispatch(getUserDataFailure(error.message))
     }
   }
 }
@@ -37,11 +39,33 @@ export const registerUserStartAsync = (email: string, password: string, addition
     dispatch(registerUserStart());
     try {
       const { user } = await signupWithEmail(email, password);
-      dispatch(createUserProfileDocumentStart(user, additionalData));
-      console.log(user)
+      dispatch(getSnapshotFromUserAuth(user, additionalData));
     } catch (error) {
-      console.log(error);
-      registerUserFailure('Error al crear usuario');
+      dispatch(getUserDataFailure(error.message));
+    }
+  }
+}
+
+export const signInUserStartAsync = (email: string, password: string) => {
+  return async (dispatch: any) => {
+    dispatch(signInUserStart());
+    try {
+      const { user } = await signInWithEmail(email, password);
+      dispatch(getSnapshotFromUserAuth(user, null))
+    } catch (error) {
+      dispatch(getUserDataFailure(error.message));
+    }
+  }
+}
+
+export const checkUserSession = () => {
+  return async (dispatch: any) => {
+    try {
+      const userAuth = await getCurrentUser();
+      if(!userAuth) return;
+      dispatch(getSnapshotFromUserAuth(userAuth, null));
+    } catch (error) {
+      dispatch(getUserDataFailure(error.message));
     }
   }
 }

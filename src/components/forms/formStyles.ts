@@ -67,7 +67,7 @@ export const Input = styled.input`
   }
 `
 
-export const SubmitButton = styled.input`
+export const SubmitButton = styled.button`
   background-color: #192369;
   color: #FFFFFF;
   cursor: pointer;

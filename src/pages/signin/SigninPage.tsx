@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import { LoginPageContainer, LoginCover } from './loginPageStyles';
 import { SigninForm, SignupForm } from '../../components/forms';
 
-export const SigninPage = ({ match }: RouteComponentProps) => {
+export const SigninPage = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const match = useRouteMatch();
 
   useEffect(() => {
     if(match.path === '/signup'){

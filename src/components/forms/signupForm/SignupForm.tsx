@@ -1,8 +1,9 @@
 import { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FormContainer, FormHeader, InputLabel, Input, SubmitButton, FormLink } from '../formStyles';
 import { registerUserStartAsync } from '../../../redux/user/userAction';
+import { Spinner } from '../../spinner/Spinner';
+import { RootState } from '../../../redux/root-reducer';
 
 interface UserCredentials {
   email: string;
@@ -19,6 +20,7 @@ export const SignupForm = () => {
     displayName: ''
   })
   const dispatch = useDispatch();
+  const isLoading = useSelector((state: RootState) => state.user.isLoading);
 
   const { email, password, confirmPassword, displayName } = userCredentials;
 
@@ -96,7 +98,9 @@ export const SignupForm = () => {
             required
           />
         </InputLabel>
-        <SubmitButton type='submit' value='Signup'/>
+        <SubmitButton type='submit'>
+          {isLoading ? <Spinner/> : 'Sign up'}
+        </SubmitButton>
       </form>
       <p>Do you have an account? <FormLink to='/signin'>Sign In</FormLink> </p>
     </FormContainer>
