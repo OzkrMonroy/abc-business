@@ -30,4 +30,6 @@ export const ProviderItems = styled.p`
   border-bottom: 1px solid rgba(0, 0, 0, .3);
   padding: 1rem;
   margin: 0;
+  font-weight: 700;
+  color: #666666;
 `

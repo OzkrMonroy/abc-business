@@ -10,6 +10,7 @@ interface UserState {
   error: boolean;
   isLoading: boolean;
   message: string | null;
+  isChecking: boolean;
 }
 
 const initialState = {
@@ -17,10 +18,22 @@ const initialState = {
   error: false,
   isLoading: false,
   message: null,
+  isChecking: true,
 }
 
 const userReducer = (state: UserState = initialState, action: any): UserState => {
   switch (action.type) {
+    case UserTypes.CHECKING_USER_AUTH_START:
+      return {
+        ...state,
+        isChecking: true,
+      }
+    case UserTypes.CHECKING_USER_AUTH_SUCCESS:
+    case UserTypes.CHECKING_USER_AUTH_FAILURE:
+      return {
+        ...state,
+        isChecking: false,
+      }
     case UserTypes.REGISTER_USER_START:
     case UserTypes.SIGN_IN_USER_START:
       return {

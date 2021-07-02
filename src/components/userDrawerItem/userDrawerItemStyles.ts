@@ -19,11 +19,11 @@ export const UserName = styled.p`
   color: #bdbdbd;
   font-size: 1.15rem;
   font-weight: 700;
+  margin-left: 1.5rem;
 `;
 export const UserItemOptions = styled.img`
   width: 2rem;
   height: 2rem;
   margin-right: 1.5rem;
-  /* padding: 0.2rem;
-  border-radius: 0.5rem; */
+  cursor: pointer;
 `;

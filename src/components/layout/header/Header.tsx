@@ -1,9 +1,13 @@
 import { HeaderContainer } from './headerStyles';
 
-export const Header = () => {
+interface Props {
+  showDrawer: () => void;
+}
+
+export const Header = ({ showDrawer }: Props) => {
   return (
     <HeaderContainer>
-      <img src="/assets/menu.svg" alt="open menu" />
+      <img src="/assets/menu.svg" alt="open menu" onClick={showDrawer}/>
     </HeaderContainer>
   )
 }

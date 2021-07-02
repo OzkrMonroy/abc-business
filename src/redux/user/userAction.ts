@@ -29,6 +29,16 @@ export const userSignOutFailure = (errorMessage: string) => ({
   payload: errorMessage
 })
 
+export const isCheckingSessionStart = () => ({
+  type: UserTypes.CHECKING_USER_AUTH_START,
+})
+export const isCheckingSessionSuccess = () => ({
+  type: UserTypes.CHECKING_USER_AUTH_SUCCESS,
+})
+export const isCheckingSessionFailure = () => ({
+  type: UserTypes.CHECKING_USER_AUTH_FAILURE,
+})
+
 // Create
 export const getSnapshotFromUserAuth = (userAuth: any, additionalData: any) => {
   return async (dispatch: any) => {
@@ -36,8 +46,10 @@ export const getSnapshotFromUserAuth = (userAuth: any, additionalData: any) => {
       const userRef = await createUserDocument(userAuth, additionalData);
       const userSnapshot = await userRef?.get();
       dispatch(getUserDataSuccess({id: userSnapshot?.id, ...userSnapshot?.data()}));
+      dispatch(isCheckingSessionSuccess());
     } catch (error) {
       dispatch(getUserDataFailure(error.message))
+      dispatch(isCheckingSessionFailure());
     }
   }
 }
@@ -69,12 +81,17 @@ export const signInUserStartAsync = (email: string, password: string) => {
 
 export const checkUserSession = () => {
   return async (dispatch: any) => {
+    dispatch(isCheckingSessionStart());
     try {
       const userAuth = await getCurrentUser();
-      if(!userAuth) return;
+      if(!userAuth) {
+        dispatch(isCheckingSessionFailure());  
+        return
+      };
       dispatch(getSnapshotFromUserAuth(userAuth, null));
     } catch (error) {
       dispatch(getUserDataFailure(error.message));
+      dispatch(isCheckingSessionFailure());
     }
   }
 }

@@ -21,6 +21,7 @@ export const DrawerContainer = styled.div<DrawerProps>`
   @media ${device.tablet}{
     width: 30%;
     left: 0;
+    transition: left 0s ease-in-out;
   }
   @media ${device.laptop}{
     width: 25%;
@@ -42,7 +43,7 @@ export const Drawer = styled.div<DrawerProps>`
 export const DrawerHeader = styled.header`
   box-shadow: 0px 4px 4px 0px #001557;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0 1.5rem;
 
@@ -54,10 +55,10 @@ export const DrawerHeader = styled.header`
   & img {
     width: 1.5rem;
     height: 1.5rem;
+    margin-right: 2rem;
   }
 `;
 
-// TODO: Move then
 export const OptionList = styled.div`
   flex: 1;
   padding: 1.5rem 1.5rem 0;

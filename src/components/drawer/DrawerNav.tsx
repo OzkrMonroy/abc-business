@@ -1,8 +1,7 @@
 import { DrawerContainer, Drawer, DrawerHeader, CloseDrawerButton, CloseDrawerContainer, OptionList } from './drawerNavStyles';
-import { OptionProps, DrawerItem } from '../channelItem/DrawerItem';
+import { OptionProps, DrawerItem } from '../drawerItem/DrawerItem';
 import { UserDrawerItem } from '../userDrawerItem/UserDrawerItem';
 
-// TODO: move this later
 const options: OptionProps[] = [
   { id: '1', title: 'Products', to: '/' },
   { id: '2', title: 'Providers', to: 'providers' },
@@ -10,7 +9,6 @@ const options: OptionProps[] = [
   { id: '4', title: 'Reports', to: '/reports' },
 ]
 
-// TODO:Temp Props
 interface Props {
   openDrawer: boolean;
   closeDrawer: () => void;
