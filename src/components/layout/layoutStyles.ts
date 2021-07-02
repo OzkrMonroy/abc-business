@@ -3,6 +3,7 @@ import device from '../../utils/css/breakpoints';
 
 export const LayoutContainer = styled.div`
   display: flex;
+  padding-top: 65px;
 `
 export const MainContainer = styled.div`
   width: 100%;

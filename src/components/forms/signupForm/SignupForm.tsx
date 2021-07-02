@@ -43,7 +43,6 @@ export const SignupForm = () => {
       return;
     }
 
-    console.log(userCredentials);
     dispatch(registerUserStartAsync(email, password, { displayName }));
   }
 

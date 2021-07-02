@@ -2,6 +2,41 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import device from "../../utils/css/breakpoints";
 
+interface ButtonProps {
+  accentColor?: boolean;
+}
+
+export const CreateFormContainer = styled.div`
+  width: 85%;
+  margin: 0 auto;
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    & label {
+      width: 100%;
+    }
+  }
+
+  @media ${device.mobileL} {
+    width: 50%;
+  }
+  @media ${device.tablet} {
+    width: 80%;
+    & form {
+      flex-direction: row;
+
+      & label {
+        width: 45%;
+      }
+    }
+  }
+`
+
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -67,8 +102,24 @@ export const Input = styled.input`
   }
 `
 
-export const SubmitButton = styled.button`
-  background-color: #192369;
+export const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  @media ${device.tablet}{
+    flex-direction: row;
+
+    & button {
+      width: 45%;
+    }
+  }
+`
+
+export const SubmitButton = styled.button<ButtonProps>`
+  background-color: ${(props) => props.accentColor ? '#6f1b27' : '#192369'};
   color: #FFFFFF;
   cursor: pointer;
   border-radius: .75rem;
@@ -82,7 +133,7 @@ export const SubmitButton = styled.button`
   margin-bottom: 1rem;
 
   &:hover {
-    background-color: #001557;
+    background-color: ${(props) => props.accentColor ? '#560015' : '#001557'};
   }
 `
 export const FormLink = styled(Link)`
