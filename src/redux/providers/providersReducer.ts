@@ -2,14 +2,14 @@ import { ProviderInterface } from "../../interfaces/ProviderInterface";
 import { ProvidersType } from "./providersTypes";
 
 interface ProvidersState {
-  providersList: ProviderInterface[] | null;
+  providersList: ProviderInterface[];
   isLoading: boolean;
   error: boolean;
   errorMessage: string | null;
 }
 
 const initialState: ProvidersState = {
-  providersList: null,
+  providersList: [],
   isLoading: false,
   error: false,
   errorMessage: null,
@@ -23,13 +23,12 @@ const providersReducer = (state: ProvidersState = initialState, action: any) : P
         isLoading: true,
       }
     case ProvidersType.CREATE_PROVIDER_SUCCESS:
-      const providerCopy = state.providersList ? state.providersList : []
       return {
         ...state,
         isLoading: false,
         error: false,
         errorMessage: null,
-        providersList: [...providerCopy, action.payload]
+        providersList: [...state.providersList, action.payload]
       }
     case ProvidersType.CREATE_PROVIDER_FAILURE:
       return {

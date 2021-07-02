@@ -22,3 +22,12 @@ export const AddProviderButton = styled.button`
   right: 1rem;
   cursor: pointer;
 `
+export const ProviderItemsContainer = styled.div`
+  box-shadow: 0 3px 8px 0px rgb(0 0 0 / 30%);
+`
+
+export const ProviderItems = styled.p`
+  border-bottom: 1px solid rgba(0, 0, 0, .3);
+  padding: 1rem;
+  margin: 0;
+`

@@ -11,21 +11,24 @@ import { ProductsPage } from './pages/products/ProductsPage';
 const App = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user)
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     checkUser();
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    setIsLoading(!!user)
+  }, [user])
+
   const checkUser = () => {
     dispatch(checkUserSession());
-    setIsLoading(false);
   }
 
   return (
     <>
-      {!isLoading ? (
+      {isLoading ? (
         <Switch>
           <Route exact path='/' render={() =>
             user ? <ProductsPage/> : <Redirect to='/signin'/>

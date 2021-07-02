@@ -9,7 +9,6 @@ export const MainContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   z-index: 1;
 
   @media ${device.tablet}{
