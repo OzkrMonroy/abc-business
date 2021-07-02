@@ -4,21 +4,11 @@ import { FormContainer, FormHeader, InputLabel, Input, SubmitButton, FormLink } 
 import { registerUserStartAsync } from '../../../redux/user/userAction';
 import { Spinner } from '../../spinner/Spinner';
 import { RootState } from '../../../redux/root-reducer';
-
-interface UserCredentials {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  displayName: string;
-}
+import { SignUpInterface } from '../../../interfaces/SignupUserInterface';
+import { initialSignupUser } from './userState';
 
 export const SignupForm = () => {
-  const [userCredentials, setUserCredentials] = useState<UserCredentials>({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    displayName: ''
-  })
+  const [userCredentials, setUserCredentials] = useState<SignUpInterface>(initialSignupUser)
   const dispatch = useDispatch();
   const isLoading = useSelector((state: RootState) => state.user.isLoading);
 
@@ -98,7 +88,7 @@ export const SignupForm = () => {
           />
         </InputLabel>
         <SubmitButton type='submit'>
-          {isLoading ? <Spinner/> : 'Sign up'}
+          {isLoading ? <Spinner size='20' color='#FFFFFF'/> : 'Sign up'}
         </SubmitButton>
       </form>
       <p>Do you have an account? <FormLink to='/signin'>Sign In</FormLink> </p>

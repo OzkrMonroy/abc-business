@@ -10,7 +10,6 @@ export const ProvidersList = ({ providers, showForm }: Props) => {
 
   return (
     <ProvidersListContainer>
-      {console.log(providers)}
       <h1>Providers</h1>
       {providers.length > 0 ? (
         <ProviderItemsContainer>

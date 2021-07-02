@@ -7,6 +7,8 @@ import { checkUserSession } from './redux/user/userAction';
 import { AuthenticatedRoute, InverseAuthenticatedRoute } from './components/auth/AuthenticatedRoute';
 import { ProvidersPage } from './pages/providers/ProvidersPage';
 import { ProductsPage } from './pages/products/ProductsPage';
+import { MainSpinnerContainer } from './appStyles';
+import { Spinner } from './components/spinner/Spinner';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -15,17 +17,12 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    checkUser();
-    // eslint-disable-next-line
-  }, []);
+    dispatch(checkUserSession());
+  }, [dispatch]);
 
   useEffect(() => {
     setIsLoading(isChecking)
   }, [isChecking])
-
-  const checkUser = () => {
-    dispatch(checkUserSession());
-  }
 
   return (
     <>
@@ -36,7 +33,7 @@ const App = () => {
           <AuthenticatedRoute exact path='/signin' component={SigninPage} user={user}/>
           <AuthenticatedRoute exact path='/signup' component={SigninPage} user={user}/>
         </Switch>
-      ): (<p>Cargando...</p>)}
+      ): (<MainSpinnerContainer><Spinner size='75' color='#001557'/></MainSpinnerContainer>)}
     </>
   );
 }

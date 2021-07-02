@@ -1,10 +1,15 @@
-import './spinnerStyles.css';
+import { HalfSpinner, CircleOne, CircleTwo } from './spinnerStyles';
 
-export const Spinner = () => {
+interface SpinnerProps {
+  size: string;
+  color: '#001557' | '#FFFFFF'
+}
+
+export const Spinner = ({ size, color='#FFFFFF' }: SpinnerProps) => {
   return (
-    <div className="half-circle-spinner">
-      <div className="circle circle-1"></div>
-      <div className="circle circle-2"></div>
-    </div>
+    <HalfSpinner spinnerColor={color} spinnerSize={size}>
+      <CircleOne spinnerColor={color} spinnerSize={size}></CircleOne>
+      <CircleTwo spinnerColor={color} spinnerSize={size}></CircleTwo>
+    </HalfSpinner>
   )
 }

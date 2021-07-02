@@ -63,7 +63,7 @@ export const SigninForm = () => {
           />
         </InputLabel>
         <SubmitButton type='submit'>
-          {isLoading ? <Spinner/> : 'Sign In'}
+          {isLoading ? <Spinner size='20' color='#FFFFFF'/> : 'Sign In'}
         </SubmitButton>
       </form>
       <p>Don't you have an account? <FormLink to='/signup'>Sign Up</FormLink> </p>
