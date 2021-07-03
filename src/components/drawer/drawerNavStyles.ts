@@ -15,7 +15,7 @@ export const DrawerContainer = styled.div<DrawerProps>`
   position: fixed;
   top: 0;
   z-index: 10;
-  transition: left 1.7s ease-in-out;
+  transition: left 1.2s ease-in-out;
   left: ${(props) => (props.isOpen ? '0rem' : '-100%')};
 
   @media ${device.tablet}{

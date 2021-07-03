@@ -36,7 +36,7 @@ export const CreateProviderForm = ({ showForm }: Props) => {
 
   return (
     <CreateFormContainer>
-      <FormHeader>
+      <FormHeader centered>
         <h2>Create provider</h2>
       </FormHeader>
       <form onSubmit={handleOnSubmit}>

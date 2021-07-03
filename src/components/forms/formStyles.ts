@@ -6,6 +6,14 @@ interface ButtonProps {
 	accentColor?: boolean;
 }
 
+interface HeaderProps {
+	centered?: boolean;
+}
+
+interface Props {
+	fullWidth?: boolean;
+}
+
 export const CreateFormContainer = styled.div`
 	width: 85%;
 	margin: 0 auto;
@@ -16,23 +24,15 @@ export const CreateFormContainer = styled.div`
 		flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: center;
-
-		& label {
-			width: 100%;
-		}
 	}
 
 	@media ${device.mobileL} {
-		width: 50%;
+		width: 70%;
 	}
 	@media ${device.tablet} {
 		width: 80%;
 		& form {
 			flex-direction: row;
-
-			& label {
-				width: 45%;
-			}
 		}
 	}
 `;
@@ -55,9 +55,9 @@ export const FormContainer = styled.div`
 	}
 `;
 
-export const FormHeader = styled.div`
+export const FormHeader = styled.div<HeaderProps>`
 	display: flex;
-	justify-content: center;
+	justify-content: ${(props) => (props.centered ? 'center' :  'flex-start')};
 	align-items: center;
 	margin-bottom: 2rem;
 
@@ -72,16 +72,21 @@ export const FormHeader = styled.div`
 	}
 `;
 
-export const InputLabel = styled.label`
+export const InputLabel = styled.label<Props>`
 	display: flex;
 	flex-direction: column;
 	font-weight: 700;
 	font-size: 1.2rem;
 	margin-bottom: 2rem;
+	width: 100%;
 
 	& span {
 		margin-bottom: 0.75rem;
 		color: #001557;
+	}
+
+	@media ${device.tablet} {
+		width: ${(props) => (props.fullWidth ? '100%' : '45%')};
 	}
 `;
 
@@ -102,7 +107,7 @@ const inputStyles = css`
 	}
 `;
 export const Input = styled.input`
-	${inputStyles}
+	${inputStyles};
 `;
 export const TextArea = styled.textarea`
 	${inputStyles}

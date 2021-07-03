@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CreateFormContainer, InputLabel, Input, SubmitButton, ButtonsContainer, FormHeader, Notice, TextArea } from '../formStyles';
+import { CreateFormContainer, InputLabel, Input, SubmitButton, ButtonsContainer, FormHeader, TextArea } from '../formStyles';
 import { ProductInterface } from "../../../interfaces/ProductInterface";
 import { productInitialState } from "./productState";
 
@@ -26,7 +26,6 @@ export const CreateProductForm = ({ showForm }: Props) => {
 
   return (
     <CreateFormContainer>
-      <Notice>It's not working!</Notice>
       <FormHeader>
         <h2>Create product</h2>
       </FormHeader>
@@ -64,7 +63,7 @@ export const CreateProductForm = ({ showForm }: Props) => {
             required
           />
         </InputLabel>
-        <InputLabel>
+        <InputLabel fullWidth>
           <span>Description: </span>
           <TextArea name="description" rows={3} onChange={handleOnChange} value={description} ></TextArea>
         </InputLabel>
