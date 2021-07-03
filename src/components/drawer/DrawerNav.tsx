@@ -5,7 +5,7 @@ import { UserDrawerItem } from '../userDrawerItem/UserDrawerItem';
 const options: OptionProps[] = [
   { id: '1', title: 'Products', to: '/' },
   { id: '2', title: 'Providers', to: 'providers' },
-  { id: '3', title: 'Containers', to: '/' },
+  { id: '3', title: 'Purchases', to: '/purchases' },
   { id: '4', title: 'Reports', to: '/' },
 ]
 

@@ -9,6 +9,7 @@ import { ProvidersPage } from './pages/providers/ProvidersPage';
 import { ProductsPage } from './pages/products/ProductsPage';
 import { MainSpinnerContainer } from './appStyles';
 import { Spinner } from './components/spinner/Spinner';
+import { PurchasesPage } from './pages/purchases/PurchasesPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const App = () => {
         <Switch>
           <InverseAuthenticatedRoute exact path='/' component={ProductsPage} user={user}/>
           <InverseAuthenticatedRoute exact path='/providers' component={ProvidersPage} user={user}/>
+          <InverseAuthenticatedRoute exact path='/purchases' component={PurchasesPage} user={user}/>
           <AuthenticatedRoute exact path='/signin' component={SigninPage} user={user}/>
           <AuthenticatedRoute exact path='/signup' component={SigninPage} user={user}/>
         </Switch>
