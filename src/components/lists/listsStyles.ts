@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const DataListContainer = styled.div`
   width: 85%;
-  margin: 0 auto 1rem;
+  margin: 0 auto 2.3rem;
 `
 
 export const AddNewDataButton = styled.button`

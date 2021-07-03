@@ -27,10 +27,6 @@ export const CreateFormContainer = styled.div`
 	}
 
 	@media ${device.mobileL} {
-		width: 70%;
-	}
-	@media ${device.tablet} {
-		width: 80%;
 		& form {
 			flex-direction: row;
 		}
@@ -59,7 +55,7 @@ export const FormHeader = styled.div<HeaderProps>`
 	display: flex;
 	justify-content: ${(props) => (props.centered ? 'center' :  'flex-start')};
 	align-items: center;
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 
 	& h1 {
 		color: #001557;
@@ -85,7 +81,7 @@ export const InputLabel = styled.label<Props>`
 		color: #001557;
 	}
 
-	@media ${device.tablet} {
+	@media ${device.mobileL} {
 		width: ${(props) => (props.fullWidth ? '100%' : '45%')};
 	}
 `;
@@ -131,7 +127,7 @@ export const ButtonsContainer = styled.div`
 	align-items: center;
 	width: 100%;
 
-	@media ${device.tablet} {
+	@media ${device.mobileL} {
 		flex-direction: row;
 
 		& button {
