@@ -8,5 +8,6 @@ export const providerInitialState: ProviderInterface = {
   webPage: '',
   email: '',
   country: '',
-  id: ''
+  id: '',
+  userId: '',
 }

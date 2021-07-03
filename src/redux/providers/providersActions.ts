@@ -1,5 +1,5 @@
 import { ProviderInterface } from "../../interfaces/ProviderInterface";
-import { addProviderToFirestore, getProvidersFromFirestore } from "../../server/firebaseHelper";
+import { addProviderToFirestore, getDataListFromFirestore } from "../../server/firebaseHelper";
 import { ProvidersType } from "./providersTypes";
 
 export const createProviderStart = () => ({
@@ -47,8 +47,7 @@ export const getProvidersListStartAsync = () => {
   return async (dispatch: any) => {
     dispatch(getProvidersListStart());
     try {
-      const querySnapshot = await getProvidersFromFirestore();
-      const providersList = querySnapshot.docs.map(doc => doc.data());
+      const providersList = await getDataListFromFirestore('Providers');
       dispatch(getProvidersListSuccess(providersList))
     } catch (error) {
       dispatch(getProvidersListFailure(error.message));

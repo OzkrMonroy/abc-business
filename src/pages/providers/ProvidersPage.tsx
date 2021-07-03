@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { CreateProviderForm } from '../../components/forms';
-import { ProvidersList } from '../../components/providersList/ProvidersList';
+import { ProvidersList } from '../../components/lists';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProvidersListStartAsync } from '../../redux/providers/providersActions';
 import { RootState } from '../../redux/root-reducer';

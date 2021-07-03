@@ -1,19 +1,5 @@
-import { ProviderInterface } from "../../interfaces/ProviderInterface";
+import { initialState, ProvidersState } from "./providerState";
 import { ProvidersType } from "./providersTypes";
-
-interface ProvidersState {
-  providersList: ProviderInterface[];
-  isLoading: boolean;
-  error: boolean;
-  errorMessage: string | null;
-}
-
-const initialState: ProvidersState = {
-  providersList: [],
-  isLoading: false,
-  error: false,
-  errorMessage: null,
-}
 
 const providersReducer = (state: ProvidersState = initialState, action: any) : ProvidersState => {
   switch (action.type) {
@@ -21,13 +7,13 @@ const providersReducer = (state: ProvidersState = initialState, action: any) : P
       return {
         ...state,
         isLoading: true,
+        error: false,
+        errorMessage: null,
       }
     case ProvidersType.CREATE_PROVIDER_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        error: false,
-        errorMessage: null,
         providersList: [...state.providersList, action.payload]
       }
     case ProvidersType.CREATE_PROVIDER_FAILURE:
@@ -48,8 +34,6 @@ const providersReducer = (state: ProvidersState = initialState, action: any) : P
       return {
         ...state,
         isLoading: false,
-        error: false,
-        errorMessage: null,
         providersList: action.payload
       }
     case ProvidersType.GET_PROVIDER_LIST_FAILURE:

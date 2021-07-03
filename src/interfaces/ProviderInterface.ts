@@ -7,4 +7,5 @@ export interface ProviderInterface {
   email: string;
   country: string;
   id: string;
+  userId: string;
 }

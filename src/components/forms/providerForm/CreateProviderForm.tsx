@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ProviderInterface } from '../../../interfaces/ProviderInterface';
 import { CreateFormContainer, InputLabel, Input, SubmitButton, ButtonsContainer, FormHeader } from '../formStyles';
 import { providerInitialState } from './providerState';
 import { createProviderStartAsync } from '../../../redux/providers/providersActions';
+import { RootState } from '../../../redux/root-reducer';
 
 interface Props {
   showForm: () => void;
@@ -15,6 +16,7 @@ export const CreateProviderForm = ({ showForm }: Props) => {
   const [provider, setProvider] = useState<ProviderInterface>(providerInitialState)
   const { name, address, phone, email, webPage, contactPerson, country } = provider;
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user.user)
 
   const handleOnChange = (e: any) => {
     const { name, value } = e.target;
@@ -27,7 +29,8 @@ export const CreateProviderForm = ({ showForm }: Props) => {
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
     const id = uuidv4();
-    const providerData = {...provider, id}
+    const userId = user!.id;
+    const providerData = {...provider, id, userId};
     dispatch(createProviderStartAsync(providerData, showForm));
   }
 

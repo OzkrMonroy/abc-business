@@ -2,6 +2,7 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { ProviderInterface } from '../interfaces/ProviderInterface';
+import { CollectionName } from './collectionsTypes';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -64,15 +65,19 @@ export const createUserDocument = async (userAuth: any, additionalData: any) => 
   return userRef;
 }
 
+export const getDataListFromFirestore = async (collectionName: CollectionName) => {
+  const dataSnapshot = await firestore.collection(collectionName).get();
+  const dataList = dataSnapshot.docs.map(doc => doc.data());
+
+  return dataList;
+}
+
 export const addProductToFirestore = (productData: {}) => {
   return firestore.collection('Products').doc().set(productData);
 }
 
 export const addProviderToFirestore = (providerData: ProviderInterface) => {
   return firestore.collection('Providers').doc(providerData.id).set(providerData);
-}
-export const getProvidersFromFirestore = () => {
-  return firestore.collection('Providers').get();
 }
 
 export default firebase;

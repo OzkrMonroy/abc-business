@@ -1,22 +1,21 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from '../../components/layout/Layout';
-import { CreateProductForm } from '../../components/forms'
+import { ProductList } from '../../components/lists';
+import { getProductsStartAsync } from '../../redux/products/productsActions';
+import { RootState } from '../../redux/root-reducer';
 
 export const ProductsPage = () => {
-  const [isCreating, setIsCreating] = useState(true);
+  const dispatch = useDispatch();
+  const products = useSelector((state: RootState) => state.products.productsList);
 
-  const showForm = () => {
-    setIsCreating(!isCreating);
-    window.scrollTo({ top: 0, behavior: 'smooth'});
-  }
+  useEffect(() => {
+    dispatch(getProductsStartAsync());
+  }, [dispatch]);
 
   return (
     <Layout>
-      {isCreating ? (
-        <CreateProductForm showForm={showForm}/>
-      ) : (
-        <p>Products List</p>
-      )}
+      <ProductList products={products}/>
     </Layout>
   )
 }

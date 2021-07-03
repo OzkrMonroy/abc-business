@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const ProvidersListContainer = styled.div`
+export const DataListContainer = styled.div`
   width: 85%;
   margin: 0 auto;
 `
 
-export const AddProviderButton = styled.button`
+export const AddNewDataButton = styled.button`
   border: none;
   width: 64px;
   height: 64px;
@@ -22,11 +22,11 @@ export const AddProviderButton = styled.button`
   right: 1rem;
   cursor: pointer;
 `
-export const ProviderItemsContainer = styled.div`
+export const DataItemsContainer = styled.div`
   box-shadow: 0 3px 8px 0px rgb(0 0 0 / 30%);
 `
 
-export const ProviderItems = styled.p`
+export const DataItem = styled.p`
   border-bottom: 1px solid rgba(0, 0, 0, .3);
   padding: 1rem;
   margin: 0;
