@@ -34,7 +34,8 @@ const providersReducer = (state: ProvidersState = initialState, action: any) : P
       return {
         ...state,
         isLoading: false,
-        providersList: action.payload
+        providersList: action.payload,
+        hasChecked: true,
       }
     case ProvidersType.GET_PROVIDER_LIST_FAILURE:
       return {

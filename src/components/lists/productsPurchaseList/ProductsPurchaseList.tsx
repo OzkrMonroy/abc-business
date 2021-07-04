@@ -8,31 +8,33 @@ import { headerItemsList } from './headerItemsList';
 import { ProductsPurchaseHeader, ProductsPurchaseHeaderItem, ProductsPurchaseListContainer, Total } from './productsPurchaseListStyles';
 
 export const ProductsPurchaseList = () => {
-  const { productsToPurchase, totalToPay } = useSelector((state: RootState) => state.productsToPurchase);
+  const { productsToPurchase, totalToPay, possibleEarnings } = useSelector((state: RootState) => state.productsToPurchase);
   const dispatch = useDispatch();
 
   const removeProduct = (product: ProductInterface) => {
-    dispatch(removeProductToPurchaseAction(product, productsToPurchase, totalToPay));
+    dispatch(removeProductToPurchaseAction(product, productsToPurchase, totalToPay, possibleEarnings));
   }
 
   return (
     <DataListContainer>
       <h1>Register purchase</h1>
-      <ProductsPurchaseListContainer>
-        <ProductsPurchaseHeader>
-          {headerItemsList.map(headerItem => (
-            <ProductsPurchaseHeaderItem key={headerItem}>
-              <p>{headerItem}</p>
-            </ProductsPurchaseHeaderItem>
-          ))}
-        </ProductsPurchaseHeader>
-        {productsToPurchase.length ? 
-          productsToPurchase.map(product => (
-            <ProductPurchaseItem product={product} key={product.id} removeProduct={removeProduct}/>
-          ))
-        : <p>No products yet!</p>}
-      </ProductsPurchaseListContainer>
+      {productsToPurchase.length ? (
+        <ProductsPurchaseListContainer>
+          <ProductsPurchaseHeader>
+            {headerItemsList.map(headerItem => (
+              <ProductsPurchaseHeaderItem key={headerItem}>
+                <p>{headerItem}</p>
+              </ProductsPurchaseHeaderItem>
+            ))}
+          </ProductsPurchaseHeader>
+          { productsToPurchase.map(product => (
+              <ProductPurchaseItem product={product} key={product.id} removeProduct={removeProduct}/>
+            ))
+          }
+        </ProductsPurchaseListContainer>
+      ) : <p>No products yet!</p>}
       <Total>Total to pay: <span>${totalToPay}</span></Total>
+      <Total>Possible earings: <span>${possibleEarnings}</span></Total>
     </DataListContainer>
   )
 }

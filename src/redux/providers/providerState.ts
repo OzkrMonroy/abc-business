@@ -5,6 +5,7 @@ export interface ProvidersState {
   isLoading: boolean;
   error: boolean;
   errorMessage: string | null;
+  hasChecked: boolean;
 }
 
 export const initialState: ProvidersState = {
@@ -12,4 +13,5 @@ export const initialState: ProvidersState = {
   isLoading: false,
   error: false,
   errorMessage: null,
+  hasChecked: false,
 }
