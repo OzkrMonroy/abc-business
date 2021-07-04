@@ -7,4 +7,5 @@ export interface ProductInterface {
   providerId: string;
   userId: string;
   photo: string;
+  quantity: number;
 }

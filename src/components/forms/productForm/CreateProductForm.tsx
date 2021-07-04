@@ -1,7 +1,11 @@
 import { useState } from 'react';
-import { CreateFormContainer, InputLabel, Input, SubmitButton, ButtonsContainer, FormHeader, TextArea } from '../formStyles';
+import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { CreateFormContainer, InputLabel, Input, SubmitButton, ButtonsContainer, FormHeader, TextArea, Select } from '../formStyles';
 import { ProductInterface } from "../../../interfaces/ProductInterface";
 import { productInitialState } from "./productState";
+import { RootState } from '../../../redux/root-reducer';
+import { addProductToPurchaseAction } from '../../../redux/productsToPurchase/productsToPurchaseActions';
 
 interface Props {
   showForm: () => void;
@@ -9,11 +13,13 @@ interface Props {
 
 export const CreateProductForm = ({ showForm }: Props) => {
   const [product, setProduct] = useState<ProductInterface>(productInitialState)
-  const { name, description, salePrice, purchasePrice } = product;
+  const providersList = useSelector((state: RootState) => state.providers.providersList);
+  const userId = useSelector((state: RootState) => state.user.user!.id);
+  const { name, description, salePrice, purchasePrice, providerId, quantity } = product;
+  const dispatch = useDispatch();
 
   const handleOnChange = (e: any) => {
     const { name, value } = e.target;
-
     setProduct({
       ...product,
       [name]: value
@@ -21,7 +27,14 @@ export const CreateProductForm = ({ showForm }: Props) => {
   }
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
-    console.log(product);
+    const id = uuidv4();
+    const salePrice = parseFloat(product.salePrice.toString());
+    const purchasePrice = parseFloat(product.purchasePrice.toString());
+    const quantity = parseInt(product.quantity.toString());
+
+    const fullProductData = {...product, id, userId, salePrice, purchasePrice, quantity}
+    dispatch(addProductToPurchaseAction(fullProductData));
+    showForm();
   }
 
   return (
@@ -34,7 +47,7 @@ export const CreateProductForm = ({ showForm }: Props) => {
           <span>Name: </span>
           <Input 
             type='text' 
-            placeholder='Provider name'
+            placeholder='Product name'
             value={name} 
             name='name'
             onChange={handleOnChange}
@@ -62,6 +75,29 @@ export const CreateProductForm = ({ showForm }: Props) => {
             onChange={handleOnChange}
             required
           />
+        </InputLabel>
+        <InputLabel>
+          <span>Quantity: </span>
+          <Input 
+            type='number'
+            value={quantity}
+            name='quantity'
+            step='1'
+            onChange={handleOnChange}
+          />
+        </InputLabel>
+        <InputLabel>
+          <span>Select provider </span>
+          <Select
+            name="providerId"
+            value={providerId}
+            onChange={handleOnChange}
+          >
+            <option value="">-- Select one --</option>
+            {providersList.map(provider => (
+              <option value={provider.id} key={provider.id}>{provider.name}</option>
+            ))}
+          </Select>
         </InputLabel>
         <InputLabel fullWidth>
           <span>Description: </span>

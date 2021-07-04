@@ -120,6 +120,26 @@ export const TextArea = styled.textarea`
 	}
 `;
 
+export const Select = styled.select`
+	display: block;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #e1e1e1;
+  appearance: none;
+	transition: border-color 1s ease-in-out;
+	color: #a5a7ad;
+	font-size: 1rem;
+	font-weight: 700;
+	outline: none;
+
+	&:hover, &:focus {
+		border-color: #001557;
+	}
+	& option {
+		text-transform: capitalize;
+	}
+`
+
 export const ButtonsContainer = styled.div`
 	display: flex;
 	flex-direction: column;

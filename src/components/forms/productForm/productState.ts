@@ -8,5 +8,6 @@ export const productInitialState: ProductInterface = {
   providerId: '',
   userId: '',
   photo: '',
-  id: ''
+  id: '',
+  quantity: 1,
 }

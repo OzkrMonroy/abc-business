@@ -14,13 +14,16 @@ const itemStyle = css`
 
 export const ProductsPurchaseListContainer = styled.div`
   width: 100%;
-  overflow-x: scroll;
+  max-height: 200px;
+  overflow: scroll;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   box-shadow: 0px -1px 14px -7px rgb(0 0 0 / 30%);
+  background-color: #0b4760;
 
   &::-webkit-scrollbar {
     height: 10px;
+    width: 10px;
   }
   &::-webkit-scrollbar-thumb {
     background: #b3b3b3;
@@ -50,5 +53,15 @@ export const ProductsPurchaseHeaderItem = styled.div`
   & p {
     ${itemStyle}
     margin-left: 1rem;
+  }
+`
+
+export const Total = styled.p`
+  color: #a5a7ad;
+  font-size: 1.2rem;
+
+  & span {
+    color: #000000;
+    font-weight: 700;
   }
 `
