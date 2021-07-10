@@ -1,0 +1,1 @@
+export const headerItemsList = ['Name', 'Description', 'Quantity', 'Purchase price', 'Sale price', 'Photo', 'Remove'];
